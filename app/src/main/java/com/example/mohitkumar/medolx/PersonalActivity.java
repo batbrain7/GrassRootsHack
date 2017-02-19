@@ -1,5 +1,6 @@
 package com.example.mohitkumar.medolx;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,13 @@ public class PersonalActivity extends AppCompatActivity
     RecyclerView.LayoutManager layoutManager;
     ArrayList<CardData> arrayList = new ArrayList<CardData>();
     EditText editText;
+    TextView textView;
     FloatingActionButton floatingActionButton;
+
+    String[] Aspirin = new String[]{"Aspirin","Aspirin","Aspirin","Aspirin"};
+    String[] Date = new String[]{"12-02-2018","23-11-2017","  -11-19","  -09-2020"};
+    String[] quantity = new String[]{"Units Available : 4","Units Available : 2","Units Available : 5","Units Available : 10"};
+    String[] price = new String[]{"Price per Unit : 10","Price per Unit : 12","Price per Unit : 8","Price per Unit : 15"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +44,13 @@ public class PersonalActivity extends AppCompatActivity
         setContentView(R.layout.activity_personal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        textView = (TextView) findViewById(R.id.name_person);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserName", Context.MODE_PRIVATE);
+
+        final String a = sharedPreferences.getString("UserName","");
+
+//        textView.setText(a);
 
         editText = (EditText) findViewById(R.id.med_input);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -55,14 +70,16 @@ public class PersonalActivity extends AppCompatActivity
 
         recyclerView = (RecyclerView) findViewById(R.id.recycle_view);
         int t = 0;
-        for(int i=0;i<4;i++) {
-            CardData placeCardData = new CardData("Meddose","Medname","Medpersoname","expire","Address");
-            arrayList.add(placeCardData);
-           // t++;
-        }
+//        for(int i=0;i<4;i++) {
+//            CardData placeCardData = new CardData(Aspirin[i],Date[i],quantity[i],price[i]);
+//            arrayList.add(placeCardData);
+//           // t++;
+//        }
         layoutManager = new LinearLayoutManager(PersonalActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        BackGroundTask backGroundTask = new BackGroundTask(PersonalActivity.this);
+        arrayList = backGroundTask.getList();
         adapter = new CardAdapter(PersonalActivity.this,arrayList);
         recyclerView.setAdapter(adapter);
 

@@ -1,10 +1,16 @@
 package com.example.mohitkumar.medolx;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -19,70 +25,80 @@ import java.util.Map;
 public class SellMedicine extends AppCompatActivity {
 
 
-    EditText descript,dose,quantity,expiry,price;
+    String server_url = "http://139.59.20.254/medex/android/sellbackend.php";
+    EditText name,descript,quantity,expiry,price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell_medicine);
 
+        name = (EditText)findViewById(R.id.drug_name);
         descript = (EditText)findViewById(R.id.drug_desc);
-        dose = (EditText)findViewById(R.id.drug_dosage);
         quantity = (EditText)findViewById(R.id.drug_quantity);
         expiry = (EditText)findViewById(R.id.drug_expiry);
         price = (EditText)findViewById(R.id.drug_price);
+
+
+        ImageView imageView = (ImageView)findViewById(R.id.image1);
+        imageView.setImageResource(R.drawable.medexlogo);
+        android.view.ViewGroup.LayoutParams layoutParams = imageView.getLayoutParams();
+        Display display = getWindowManager().getDefaultDisplay();
+        layoutParams.height = (int) (display.getHeight()*0.20);
+        layoutParams.width = display.getWidth();
+        imageView.setLayoutParams(layoutParams);
     }
 
     public void SubmitDet(View view){
 
-        String desc,dos,quant,expire,pric;
+        final String dname,desc,quant,expire,pric;
 
+        dname = name.getText().toString();
         desc = descript.getText().toString();
-        dos = dose.getText().toString();
         quant = quantity.getText().toString();
         expire = expiry.getText().toString();
         pric = price.getText().toString();
 
-        if(desc.equals("")||dos.equals("")||quant.equals("")||expire.equals("")||pric.equals("")) {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserName", Context.MODE_PRIVATE);
+
+        final String a = sharedPreferences.getString("UserName","");
+
+        if(dname.equals("")||desc.equals("")||quant.equals("")||expire.equals("")||pric.equals("")) {
             Toast.makeText(SellMedicine.this,"Enter all the details",Toast.LENGTH_LONG).show();
         }
         else {
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Toast.makeText(getApplicationContext(),"Slow Internet !!!",Toast.LENGTH_LONG).show();
-//                }
-//            }){
-//                @Override
-//                protected Map<String, String> getParams() throws AuthFailureError {
-//                    Map<String,String> params = new HashMap<String, String>();
-//                    Log.d("In gere","In here");
-//
-//                    params.put("queryno",s);
-//                    params.put("firno",firnum);
-//                    params.put("district",dist);
-//                    params.put("station",stations);
-//                    params.put("officer",officer);
-//                    params.put("mobile",Long.toString(mob1));
-//                    params.put("query",qiuery);
-//                    params.put("date",datee.toString());
-//                    params.put("time",time);
-//                    params.put("cname",name1);
-//                    params.put("cmob",mob);
-//                    params.put("querystat","No");
-//                    params.put("escio","IO123");
-//                    params.put("escsho","SHO123");
-//                    params.put("escdcp","DCP123");
-//                    params.put("escacp","ACP123");
-//                    return params;
-//                }
-//            };
-//
-//            MySingleton.getInstance(QueryActivity.this).addToRequestQueue(stringRequest);
+            ProgressDialog progressDialog = new ProgressDialog(SellMedicine.this);
+            progressDialog.setTitle("Wait..");
+            progressDialog.setMessage("Adding you to our network");
+            progressDialog.show();
+            StringRequest stringRequest = new StringRequest(Request.Method.POST,server_url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(),"",Toast.LENGTH_LONG).show();
+                }
+            }){
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String,String> params = new HashMap<String, String>();
+                    Log.d("In gere","In here");
+
+                    params.put("MEDNAME",dname);
+                    params.put("MEDDESC",desc);
+                    params.put("EXPDATE",expire);
+                    params.put("QUANTITY",quant);
+                    params.put("PRICE",pric);
+                    params.put("userkey",a);
+                    return params;
+                }
+            };
+
+            MySingleton.getInstance(SellMedicine.this).addToRequestQueue(stringRequest);
+
+            Intent intent = new Intent(SellMedicine.this,PersonalActivity.class);
 
         }
 

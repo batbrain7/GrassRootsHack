@@ -8,6 +8,7 @@ public class SoldMed extends AppCompatActivity {
 
 
     RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,16 +9,31 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#f35266"
+    android:background="@drawable/grad2"
     tools:context="com.example.mohitkumar.medolx.SignUp">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/image1"
+        android:layout_gravity="center_horizontal"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Enter your full name"
+            android:hint="Full name"
             android:id="@+id/input_nam"
             />
     </android.support.design.widget.TextInputLayout>
@@ -27,9 +42,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Enter Address"
+            android:hint="Address"
             android:id="@+id/Add_line_1"
             />
     </android.support.design.widget.TextInputLayout>
@@ -38,6 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="PINCODE"
@@ -49,9 +66,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:hint="Choose Username"
+            android:hint="Username"
             android:id="@+id/user_name"
             />
     </android.support.design.widget.TextInputLayout>
@@ -60,9 +78,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="Enter Password"
+            android:inputType="textPassword"
             android:id="@+id/input_pass"
             />
     </android.support.design.widget.TextInputLayout>
@@ -70,8 +90,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:textColor="#fff"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:inputType="textPassword"
             android:hint="Confirm Password"
             android:id="@+id/confirm_password"
             />
@@ -88,4 +110,6 @@
         android:onClick="SignedUp"
         android:layout_gravity="center_horizontal"
         />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -6,13 +6,30 @@ package com.example.mohitkumar.medolx;
 
 public class CardData {
 
-    String medname,meddose,medpersonname,expirydate,address;
-    public CardData(String meddose,String medname,String medpersonname,String expirydate,String address) {
+    String medname,meddose,expirydate,address,quantity,usrname;
+    public CardData(String meddose,String medname,String expirydate,String address,String quantity,String usrname) {
         this.meddose = meddose;
         this.medname = medname;
-        this.medpersonname = medpersonname;
         this.expirydate = expirydate;
         this.address = address;
+        this.quantity = quantity;
+        this.usrname = usrname;
+    }
+
+    public String getUsrname() {
+        return usrname;
+    }
+
+    public void setUsrname(String usrname) {
+        this.usrname = usrname;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getExpirydate() {
@@ -31,10 +48,6 @@ public class CardData {
         return address;
     }
 
-    public String getMedpersonname() {
-        return medpersonname;
-    }
-
     public void setExpirydate(String expirydate) {
         this.expirydate = expirydate;
     }
@@ -45,10 +58,6 @@ public class CardData {
 
     public void setMedname(String medname) {
         this.medname = medname;
-    }
-
-    public void setMedpersonname(String medpersonname) {
-        this.medpersonname = medpersonname;
     }
 
     public void setAddress(String address) {

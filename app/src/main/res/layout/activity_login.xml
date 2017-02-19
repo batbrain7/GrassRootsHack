@@ -9,20 +9,24 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="#f35266"
+    android:background="@drawable/grad2"
     tools:context="com.example.mohitkumar.medolx.Login">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/image1"
+        android:layout_gravity="center_horizontal"
         />
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        >
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="#fff"
             android:hint="Enter your ID"
             android:id="@+id/identer"
             />
@@ -34,6 +38,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textColor="#fff"
             android:hint="Enter your Password"
             android:id="@+id/passwordenter"
             android:inputType="textPassword"
@@ -48,14 +53,15 @@
         android:background="@drawable/roundedbutton"
         android:textColor="@color/colorPrimaryDark"
         android:onClick="LoginIn"
+        android:layout_marginTop="30dp"
         android:layout_gravity="center"
-        android:layout_marginTop="250dp"
         />
 
     <TextView
         android:layout_weight="1"
         android:text="Not a User?"
         android:gravity="bottom"
+        android:textColor="#fff"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,6 +70,7 @@
     <TextView
         android:text="Sign Up here"
         android:layout_weight="0.4"
+        android:textColor="#fff"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
